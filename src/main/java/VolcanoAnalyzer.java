@@ -40,7 +40,7 @@ public class VolcanoAnalyzer {
     public List<String> highVEI() {
         return volcanos.parallelStream()
                 .filter(v -> v.getVEI() >= 6)
-                .map(v -> v.getName())
+                .map(Volcano::getName)
                 .collect(Collectors.toList());
     }
 
@@ -53,7 +53,7 @@ public class VolcanoAnalyzer {
     public double causedTsunami() {
         return volcanos.parallelStream()
                 .filter(v -> v.getTsu().equals("tsu"))
-                .collect(Collectors.counting()) * 100d / volcanos.size();
+                .count() * 100d / volcanos.size();
     }
 
     public String mostCommonType() {
@@ -68,12 +68,12 @@ public class VolcanoAnalyzer {
     public Long eruptionsByCountry(String country) {
         return volcanos.stream()
                 .filter(v -> v.getCountry().equals(country))
-                .collect(Collectors.counting());
+                .count();
     }
 
     public double averageElevation() {
         return (double)volcanos.stream()
-                .collect(Collectors.summingInt(Volcano::getElevation))/volcanos.size();
+                .mapToInt(Volcano::getElevation).sum()/volcanos.size();
     }
 
     public List<String> volcanoTypes() {
@@ -83,39 +83,35 @@ public class VolcanoAnalyzer {
     }
 
     public double percentNorth() {
-        return ((double)volcanos.parallelStream()
+        return volcanos.parallelStream()
                 .filter(v -> v.getLatitude() > 0)
-                .collect(Collectors.toList())
-                .size()) * 100 /volcanos.size();
+                .count() * 100d / volcanos.size();
     }
 
-    public String[] manyFilters() {
+    public List<String> manyFilters() {
         return volcanos.stream()
                 .filter(v -> v.getYear() > 1800)
                 .filter(v -> v.getTsu() == "")
                 .filter(v -> v.getLatitude() < 0 )
                 .filter(v -> v.getVEI() == 5)
-                .map(v -> v.getName())
-                .collect(Collectors.toList())
-                .toArray(new String[0]);
+                .map(Volcano::getName)
+                .collect(Collectors.toList());
     }
 
-    public String[] elevatedVolcanoes(int elevation) {
+    public List<String> elevatedVolcanoes(int elevation) {
         return volcanos.stream()
                 .filter(v -> v.getElevation() >= elevation)
-                .map(v->v.getName())
-                .collect(Collectors.toList())
-                .toArray(new String[0]);
+                .map(Volcano::getName)
+                .collect(Collectors.toList());
     }
 
-    public String[] topAgentsOfDeath() {
+    public List<String> topAgentsOfDeath() {
         return volcanos.stream()
                 .sorted((v1, v2)->Integer.parseInt("0" + v2.getDEATHS()) - (Integer.parseInt("0" + v1.getDEATHS())))
                 .limit(10)
                 .map(v-> Arrays.asList( v.getAgent().isEmpty() ? new String[0] : v.getAgent().split(",")))
                 .flatMap(List::stream)
                 .distinct()
-                .collect(Collectors.toList())
-                .toArray(new String[0]);
+                .collect(Collectors.toList());
     }
 }

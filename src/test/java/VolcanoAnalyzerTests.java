@@ -8,7 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 
@@ -208,13 +207,13 @@ public class VolcanoAnalyzerTests {
     @Test
     public void manyFilters() {
         //Setup
-        String[] expected = { "Galunggung", "Hudson, Cerro" };
+        List<String> expected = Arrays.asList("Galunggung", "Hudson, Cerro" );
         //Execute
-        String[] actual = va.manyFilters();
+        List<String> actual = va.manyFilters();
 
         //Assert
-        assertEquals("should have 3 volcanoes", expected.length, actual.length);
-        assertArrayEquals("should have the correct volcanoes",expected, actual);
+        assertEquals("specifically filtered volcanoes count", expected.size(), actual.size());
+        assertEquals("specifically filtered volcanoes",expected, actual);
 
         //Teardown
     }
@@ -222,14 +221,14 @@ public class VolcanoAnalyzerTests {
     @Test
     public void elevatedVolcanoes() {
         //Setup
-        String[] expected = { "Tungurahua", "Cotopaxi", "Bona-Churchill", "Bona-Churchill", "Ruiz", "Tungurahua", "Cotopaxi", "Cotopaxi", "Cotopaxi", "Cotopaxi", "Sabancaya", "Ararat", "Ruiz", "Cotopaxi", "Tungurahua", "Tungurahua", "Popocatepetl", "Sangay", "Ruiz", "Sabancaya", "Huila", "Popocatepetl", "Tungurahua", "Tungurahua", "Tungurahua", "Huila", "Tungurahua", "Huila", "Tungurahua", "Tungurahua", "Tungurahua", "Ubinas" };
+        List<String> expected = Arrays.asList( "Tungurahua", "Cotopaxi", "Bona-Churchill", "Bona-Churchill", "Ruiz", "Tungurahua", "Cotopaxi", "Cotopaxi", "Cotopaxi", "Cotopaxi", "Sabancaya", "Ararat", "Ruiz", "Cotopaxi", "Tungurahua", "Tungurahua", "Popocatepetl", "Sangay", "Ruiz", "Sabancaya", "Huila", "Popocatepetl", "Tungurahua", "Tungurahua", "Tungurahua", "Huila", "Tungurahua", "Huila", "Tungurahua", "Tungurahua", "Tungurahua", "Ubinas" );
 
         //Execute
-        String[] actual = va.elevatedVolcanoes(4990);
+        List<String> actual = va.elevatedVolcanoes(4990);
 
         //Assert
-        assertEquals("should have 32 volcanoes above 4990", expected.length, actual.length);
-        assertArrayEquals("should have the correct volcanoes",expected, actual);
+        assertEquals("elevated volcanoes count", expected.size(), actual.size());
+        assertEquals("elevated volcanoes",expected, actual);
 
         //Teardown
     }
@@ -237,13 +236,13 @@ public class VolcanoAnalyzerTests {
     @Test
     public void topAgentsOfDeath() {
         //Setup
-        String[] expected = { "P", "M", "W", "A", "I" };
+        List<String> expected = Arrays.asList( "P", "M", "W", "A", "I" );
 
         //Execute
-        String[] actual = va.topAgentsOfDeath();
+        List<String> actual = va.topAgentsOfDeath();
 
         //Assert
-        assertEquals("Agents of Death count", expected.length, actual.length);
+        assertEquals("Agents of Death count", expected.size(), actual.size());
         assertEquals("Agents of Death", expected, actual);
 
         //Teardown
