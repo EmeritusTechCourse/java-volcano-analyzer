@@ -4,7 +4,12 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 
 
 public class VolcanoAnalyzerTests {
@@ -39,7 +44,7 @@ public class VolcanoAnalyzerTests {
         Integer actual = va.numbVolcanoes();
 
         //Assert
-        Assert.assertEquals("should have 804 volcanoes", expected, actual);
+        assertEquals("should have 804 volcanoes", expected, actual);
 
         //Teardown
     }
@@ -53,7 +58,7 @@ public class VolcanoAnalyzerTests {
         Integer actual = va.eruptedInEighties().size();
 
         //Assert
-        Assert.assertEquals("should have 40 volcanoes", expected, actual);
+        assertEquals("should have 40 volcanoes", expected, actual);
 
         //Teardown
     }
@@ -61,14 +66,14 @@ public class VolcanoAnalyzerTests {
     @Test
     public void highVEI() {
         //Setup
-        String[] expected = { "Macauley Island", "Kikai", "Masaya", "Pago", "Taal", "Pinatubo", "Long Island", "Black Peak", "St. Helens", "Veniaminof", "Aniakchak", "Santorini", "Taupo", "Pago", "Pinatubo", "Raoul Island", "Okmok", "Apoyeque", "Ambrym", "Bona-Churchill", "Taupo", "Ksudach", "Ilopango", "Rabaul", "Pago", "Bona-Churchill", "Dakataua", "Ceboruco", "Changbaishan", "Quilotoa", "Kuwae", "Bardarbunga", "Huaynaputina", "Long Island", "Tambora", "Krakatau", "Santa Maria", "Novarupta", "Pinatubo" };
+        List<String> expected = Arrays.asList("Macauley Island", "Kikai", "Masaya", "Pago", "Taal", "Pinatubo", "Long Island", "Black Peak", "St. Helens", "Veniaminof", "Aniakchak", "Santorini", "Taupo", "Pago", "Pinatubo", "Raoul Island", "Okmok", "Apoyeque", "Ambrym", "Bona-Churchill", "Taupo", "Ksudach", "Ilopango", "Rabaul", "Pago", "Bona-Churchill", "Dakataua", "Ceboruco", "Changbaishan", "Quilotoa", "Kuwae", "Bardarbunga", "Huaynaputina", "Long Island", "Tambora", "Krakatau", "Santa Maria", "Novarupta", "Pinatubo");
 
         //Execute
-        String[] actual = va.highVEI();
+        List<String> actual = va.highVEI();
 
         //Assert
-        Assert.assertEquals("should have 39 volcanoes", expected.length, actual.length);
-        Assert.assertArrayEquals("should have the correct volcanoes",expected, actual);
+        assertEquals("should have 39 volcanoes", expected.size(), actual.size());
+        assertEquals("should have the correct volcanoes", expected, actual);
 
         //Teardown
     }
@@ -95,19 +100,19 @@ public class VolcanoAnalyzerTests {
         Volcano actual = va.mostDeadly();
 
         //Assert
-        Assert.assertEquals("should have correct year", expected.getYear(), actual.getYear());
-        Assert.assertEquals("should have correct Tsu", expected.getTsu(), actual.getTsu());
-        Assert.assertEquals("should have correct EQ", expected.getEQ(), actual.getEQ());
-        Assert.assertEquals("should have correct Name", expected.getName(), actual.getName());
-        Assert.assertEquals("should have correct Location", expected.getLocation(), actual.getLocation());
-        Assert.assertEquals("should have correct Country", expected.getCountry(), actual.getCountry());
-        Assert.assertEquals("should have correct Latitude", expected.getLatitude(), actual.getLatitude());
-        Assert.assertEquals("should have correct Longitude", expected.getLongitude(), actual.getLongitude());
-        Assert.assertEquals("should have correct Elevation", expected.getElevation(), actual.getElevation());
-        Assert.assertEquals("should have correct Type", expected.getType(), actual.getType());
-        Assert.assertEquals("should have correct VEI", expected.getVEI(), actual.getVEI());
-        Assert.assertEquals("should have correct Agent", expected.getAgent(), actual.getAgent());
-        Assert.assertEquals("should have correct DEATHS", expected.getDEATHS(), actual.getDEATHS());
+        assertEquals("should have correct year", expected.getYear(), actual.getYear());
+        assertEquals("should have correct Tsu", expected.getTsu(), actual.getTsu());
+        assertEquals("should have correct EQ", expected.getEQ(), actual.getEQ());
+        assertEquals("should have correct Name", expected.getName(), actual.getName());
+        assertEquals("should have correct Location", expected.getLocation(), actual.getLocation());
+        assertEquals("should have correct Country", expected.getCountry(), actual.getCountry());
+        assertEquals("should have correct Latitude", expected.getLatitude(), actual.getLatitude());
+        assertEquals("should have correct Longitude", expected.getLongitude(), actual.getLongitude());
+        assertEquals("should have correct Elevation", expected.getElevation(), actual.getElevation());
+        assertEquals("should have correct Type", expected.getType(), actual.getType());
+        assertEquals("should have correct VEI", expected.getVEI(), actual.getVEI());
+        assertEquals("should have correct Agent", expected.getAgent(), actual.getAgent());
+        assertEquals("should have correct DEATHS", expected.getDEATHS(), actual.getDEATHS());
         //Teardown
     }
 
@@ -120,7 +125,7 @@ public class VolcanoAnalyzerTests {
         double actual = va.causedTsunami();
 
         //Assert
-        Assert.assertEquals("should be about 17.0 percent", expected, actual, .1);
+        assertEquals("should be about 17.0 percent", expected, actual, .1);
 
         //Teardown
     }
@@ -134,7 +139,7 @@ public class VolcanoAnalyzerTests {
         String actual = va.mostCommonType();
 
         //Assert
-        Assert.assertEquals("should be Stratovolcano", expected, actual);
+        assertEquals("should be Stratovolcano", expected, actual);
 
         //Teardown
     }
@@ -147,14 +152,14 @@ public class VolcanoAnalyzerTests {
         int expected3 = 0;
 
         //Execute
-        int actual1 = va.eruptionsByCountry("United States");
-        int actual2 = va.eruptionsByCountry("Indonesia");
-        int actual3 = va.eruptionsByCountry("Zimbabwe");
+        long actual1 = va.eruptionsByCountry("United States");
+        long actual2 = va.eruptionsByCountry("Indonesia");
+        long actual3 = va.eruptionsByCountry("Zimbabwe");
 
         //Assert
-        Assert.assertEquals("should be 47 eruptions in United States", expected1, actual1);
-        Assert.assertEquals("should be 189 eruptions in Indonesia", expected2, actual2);
-        Assert.assertEquals("should be 0 eruptions in Zimbabwe", expected3, actual3);
+        assertEquals("should be 47 eruptions in United States", expected1, actual1);
+        assertEquals("should be 189 eruptions in Indonesia", expected2, actual2);
+        assertEquals("should be 0 eruptions in Zimbabwe", expected3, actual3);
         //Teardown
     }
 
@@ -167,7 +172,7 @@ public class VolcanoAnalyzerTests {
         double actual = va.averageElevation();
 
         //Assert
-        Assert.assertEquals("should be about 1993.71", expected, actual, .1);
+        assertEquals("should be about 1993.71", expected, actual, .1);
 
         //Teardown
     }
@@ -175,13 +180,13 @@ public class VolcanoAnalyzerTests {
     @Test
     public void volcanoTypes() {
         //Setup
-        String[] expected = { "Caldera", "Stratovolcano", "Complex volcano", "Shield volcano", "Pyroclastic shield", "Volcanic field", "Lava dome", "Subglacial volcano", "Crater rows", "Tuff cone", "Fissure vent", "Pyroclastic cone", "Submarine volcano", "Lava cone", "Pumice cone", "Mud volcano", "Cinder cone", "Compound volcano", "Maar"};
+        List<String> expected = Arrays.asList("Caldera", "Stratovolcano", "Complex volcano", "Shield volcano", "Pyroclastic shield", "Volcanic field", "Lava dome", "Subglacial volcano", "Crater rows", "Tuff cone", "Fissure vent", "Pyroclastic cone", "Submarine volcano", "Lava cone", "Pumice cone", "Mud volcano", "Cinder cone", "Compound volcano", "Maar");
         //Execute
-        String[] actual = va.volcanoTypes();
+        List<String> actual = va.volcanoTypes();
 
         //Assert
-        Assert.assertEquals("should have 19 volcano types", expected.length, actual.length);
-        Assert.assertArrayEquals("should have the correct volcano types",expected, actual);
+        assertEquals("should have 19 volcano types", expected.size(), actual.size());
+        assertEquals("should have the correct volcano types",expected, actual);
 
         //Teardown
     }
@@ -195,7 +200,7 @@ public class VolcanoAnalyzerTests {
         double actual = va.percentNorth();
 
         //Assert
-        Assert.assertEquals("should be about 64.55 percent", expected, actual, .1);
+        assertEquals("should be about 64.55 percent", expected, actual, .1);
 
         //Teardown
     }
@@ -208,8 +213,8 @@ public class VolcanoAnalyzerTests {
         String[] actual = va.manyFilters();
 
         //Assert
-        Assert.assertEquals("should have 3 volcanoes", expected.length, actual.length);
-        Assert.assertArrayEquals("should have the correct volcanoes",expected, actual);
+        assertEquals("should have 3 volcanoes", expected.length, actual.length);
+        assertArrayEquals("should have the correct volcanoes",expected, actual);
 
         //Teardown
     }
@@ -223,8 +228,8 @@ public class VolcanoAnalyzerTests {
         String[] actual = va.elevatedVolcanoes(4990);
 
         //Assert
-        Assert.assertEquals("should have 32 volcanoes above 4990", expected.length, actual.length);
-        Assert.assertArrayEquals("should have the correct volcanoes",expected, actual);
+        assertEquals("should have 32 volcanoes above 4990", expected.length, actual.length);
+        assertArrayEquals("should have the correct volcanoes",expected, actual);
 
         //Teardown
     }
@@ -238,8 +243,8 @@ public class VolcanoAnalyzerTests {
         String[] actual = va.topAgentsOfDeath();
 
         //Assert
-        Assert.assertEquals("should have 5 Agents of Death", expected.length, actual.length);
-        Assert.assertArrayEquals("should have the correct Agents of Death",expected, actual);
+        assertEquals("Agents of Death count", expected.length, actual.length);
+        assertEquals("Agents of Death", expected, actual);
 
         //Teardown
     }
