@@ -205,11 +205,11 @@ public class VolcanoAnalyzerTests {
     }
 
     @Test
-    public void manyFilters() {
+    public void manyConditions() {
         //Setup
         List<String> expected = Arrays.asList("Galunggung", "Hudson, Cerro" );
         //Execute
-        List<String> actual = va.manyFilters();
+        List<String> actual = va.manyConditions();
 
         //Assert
         assertEquals("specifically filtered volcanoes count", expected.size(), actual.size());

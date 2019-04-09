@@ -88,12 +88,13 @@ public class VolcanoAnalyzer {
                 .count() * 100d / volcanos.size();
     }
 
-    public List<String> manyFilters() {
+    public List<String> manyConditions() {
         return volcanos.stream()
-                .filter(v -> v.getYear() > 1800)
-                .filter(v -> v.getTsu() == "")
-                .filter(v -> v.getLatitude() < 0 )
-                .filter(v -> v.getVEI() == 5)
+                .filter(v -> v.getYear() > 1800
+                    && v.getTsu() == ""
+                    && v.getLatitude() < 0
+                    && v.getVEI() == 5
+                )
                 .map(Volcano::getName)
                 .collect(Collectors.toList());
     }
